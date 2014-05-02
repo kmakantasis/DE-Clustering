@@ -3,11 +3,14 @@ clear all
 
 [data, num_classes] = DataRead('Aggregation.xls');
 solution_len = length(data);
-population_size = 800;
+population_size = 5000;
+
+cost_matrix = ComputeCostData(data);
+
 population = CreatePopulation(num_classes, population_size, solution_len);
     
 
-[best_solution, min_cost] = DifferentialEvolution(population, data, num_classes, 0.8, 0.9, 5);
+[best_solution, min_cost, population2] = DifferentialEvolution(cost_matrix, population, data, num_classes, 0.5, 0.5, 500);
 
 for i=1:num_classes
     idx = find(best_solution==i);
