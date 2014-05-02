@@ -1,4 +1,4 @@
-function [best_solution, min_cost] = DifferentialEvolution(population, data, num_classes, F, CR, generations)
+function [best_solution, min_cost, population] = DifferentialEvolution(cost_matrix, population, data, num_classes, F, CR, generations)
 
 %centroids = CreateCentroids(data, num_classes, population(1,:));
 sl = length(population(1,:));
@@ -16,17 +16,19 @@ for i = 1:generations
             r_i = rand();
         
             if r_i < CR
-                y_i = a(l) + F * (b(l) - c(l));
+                %y_i = a(l) + F * (b(l) - c(l));
+                y_i = a(l); %(a(l)+b(l)+c(l))/3;
+                %y_i = round(y_i);
             else
                 y_i = x(l);
             end
             
             y = [y y_i];
         end
-        y = DiscretizeY(y, num_classes);
+        %y = DiscretizeY(y, num_classes);
         
-        cost_x = InterClusterCost(data, x, num_classes);
-        cost_y = InterClusterCost(data, y, num_classes);
+        cost_x = InterClusterCost(cost_matrix, x, num_classes);
+        cost_y = InterClusterCost(cost_matrix, y, num_classes);
         
         %cost_x = ObjectiveCost(data, x, sl, centroids);
         %cost_y = ObjectiveCost(data, y, sl, centroids);
@@ -40,7 +42,7 @@ for i = 1:generations
         else
             if cost_x < min_cost
                 best_solution = x;
-                min_cost = cost_x
+                min_cost = cost_x;
             end
         end
     end
