@@ -5,7 +5,7 @@ while(1)
         break;
     end
 end
-a = population(a,:);
+a = population{a};
 
 while(1)
     b = randi(sz);
@@ -13,7 +13,7 @@ while(1)
         break;
     end
 end
-b = population(b,:);
+b = population{b};
 
 while(1)
     c = randi(sz);
@@ -21,7 +21,7 @@ while(1)
         break;
     end
 end
-c = population(c,:);
+c = population{c};
 
 end
 
