@@ -8,10 +8,10 @@ population_size = 5000;
 population = CreatePopulation(population_size, solution_len, data);
 
 [sz, ret] = size(data);
-inter_intra = sz / (2 *num_classes^2);
+inter_intra = sz / num_classes^2;
     
 
-[best_solution, min_cost, population2, y] = DifferentialEvolution(population, data, num_classes, inter_intra, 0.5, 0.5, 100, 20);
+[best_solution, min_cost, population2, y] = DifferentialEvolution(population, data, num_classes, inter_intra, 0.5, 0.5, 500, 100);
 
 clustering = zeros(sz,1);
 for i=1:sz
